@@ -48,11 +48,11 @@ function [clusterIdx] = findClustering(data, ns, centers, isLast, isFair)
                 if clusNum(i) == 0
                     [~,sArr] = sort(sum((data - centers(i, :)).^2, 2));
                     for j = 1:n
-                        if sArr(j) <= n1
+                        if sArr(j) <= ns(1)
                             temp = clusterIdx{1}(sArr(j));
                             tempi = 1;
                         else
-                            temp = clusterIdx{2}(sArr(j) - n1);
+                            temp = clusterIdx{2}(sArr(j) - ns(1));
                             tempi = 2;
                         end
                         if clusNum(temp) > 1
@@ -61,7 +61,7 @@ function [clusterIdx] = findClustering(data, ns, centers, isLast, isFair)
                             if tempi == 1
                                 clusterIdx{1}(sArr(j)) = i;
                             else
-                                clusterIdx{2}(sArr(j) - n1) = i;
+                                clusterIdx{2}(sArr(j) - ns(1)) = i;
                             end
                             break;
                         end
